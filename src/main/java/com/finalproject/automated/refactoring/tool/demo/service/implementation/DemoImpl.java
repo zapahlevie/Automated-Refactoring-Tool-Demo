@@ -9,6 +9,8 @@ import com.finalproject.automated.refactoring.tool.model.ClassModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,8 @@ public class DemoImpl implements Demo {
 
     private static final Long LAZY_CLASS_THRESHOLD = 5L;
 
+    private Map<String, List<ClassModel>> lazyClasses = new LinkedHashMap<String, List<ClassModel>>();
+
     @Override
     public void doCodeSmellDetection(List<String> paths) {
         Map<String, List<FileModel>> files = filesDetection.detect(paths, ".java");
@@ -37,7 +41,7 @@ public class DemoImpl implements Demo {
 
         System.out.println();
         System.out.println("Project Path -> " + path);
-        System.out.println("Files detected -> " + classes.size());
+        System.out.println("Files detected -> " + fileModels.size());
 
 //        fileModels.forEach((temp) ->{
 //            System.out.println("Content for file :\n" + temp.getPath()+"\\"+temp.getFilename() + "\n");
@@ -45,10 +49,19 @@ public class DemoImpl implements Demo {
 //        });
 
         System.out.println("Class detected -> " + classes.size());
-        System.out.println();
 
         classes.forEach(this::searchLazyClass);
-        classes.forEach(this::doPrintClass);
+        System.out.println("Lazy Class detected -> " + lazyClasses.size());
+        System.out.println();
+        lazyClasses.forEach(this::doPrintLazyClass);
+//        classes.forEach(this::doPrintClass);
+    }
+
+    private void searchLazyClass(String filename, List<ClassModel> classModels) {
+        List<ClassModel> lazyClasses = lazyClassDetection.detect(classModels, LAZY_CLASS_THRESHOLD);
+        if(lazyClasses.size() > 0){
+            this.lazyClasses.put(filename, lazyClasses);
+        }
     }
 
     private void doPrintClass(String s, List<ClassModel> classModels) {
@@ -73,14 +86,11 @@ public class DemoImpl implements Demo {
         });
     }
 
-    private void searchLazyClass(String filename, List<ClassModel> classModels) {
-        List<ClassModel> lazyClasses = lazyClassDetection.detect(classModels, LAZY_CLASS_THRESHOLD);
-        lazyClasses.forEach(this::doPrintClass);
-    }
-
-    private void doPrintClass(ClassModel classModel) {
-        System.out.println("Lazy class detected -> " + classModel.getName());
-        System.out.println("NOM : " + classModel.getNom());
-        System.out.println("NOF : " + classModel.getNof());
+    private void doPrintLazyClass(String s, List<ClassModel> classModels) {
+        for(ClassModel classModel : classModels){
+            System.out.println("Lazy class detected -> " + classModel.getName());
+            System.out.println("NOM : " + classModel.getNom());
+            System.out.println("NOF : " + classModel.getNof());
+        }
     }
 }
