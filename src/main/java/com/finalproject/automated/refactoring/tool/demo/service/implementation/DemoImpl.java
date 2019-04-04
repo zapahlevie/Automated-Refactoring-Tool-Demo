@@ -53,8 +53,8 @@ public class DemoImpl implements Demo {
         classes.forEach(this::searchLazyClass);
         System.out.println("Lazy Class detected -> " + lazyClasses.size());
         System.out.println();
-        lazyClasses.forEach(this::doPrintLazyClass);
-//        classes.forEach(this::doPrintClass);
+//        lazyClasses.forEach(this::doPrintLazyClass);
+        classes.forEach(this::doPrintClass);
     }
 
     private void searchLazyClass(String filename, List<ClassModel> classModels) {
@@ -66,23 +66,23 @@ public class DemoImpl implements Demo {
 
     private void doPrintClass(String s, List<ClassModel> classModels) {
         classModels.forEach((temp) ->{
-            System.out.println();
+//            System.out.println();
             System.out.println(s);
-            System.out.println("Package : " + temp.getPackageName());
-            System.out.println("Import : " + temp.getImports());
-            System.out.println("Keywords : " + temp.getKeywords());
-            System.out.println("ClassName : " + temp.getName());
-            System.out.println("Extends : " + temp.getExtend());
-            System.out.println("Implemets : " + temp.getImplement());
-            System.out.println("Attributes : " + temp.getAttributes());
-            System.out.print("Methods : [" + temp.getMethodModels().size() + " ");
-            temp.getMethodModels().forEach((m) ->{
-                System.out.print(m.getName() + " ");
-            });
-            System.out.println("]");
-            System.out.println("NOM : " + temp.getNom());
-            System.out.println("NOF : " + temp.getNof());
-            System.out.println();
+//            System.out.println("Package : " + temp.getPackageName());
+//            System.out.println("Import : " + temp.getImports());
+//            System.out.println("Keywords : " + temp.getKeywords());
+//            System.out.println("ClassName : " + temp.getName());
+//            System.out.println("Extends : " + temp.getExtend());
+//            System.out.println("Implemets : " + temp.getImplement());
+//            System.out.println("Attributes : " + temp.getAttributes());
+//            System.out.print("Methods : [" + temp.getMethodModels().size() + " ");
+//            temp.getMethodModels().forEach((m) ->{
+//                System.out.print(m.getName() + " ");
+//            });
+//            System.out.println("]");
+//            System.out.println("NOM : " + temp.getNom());
+//            System.out.println("NOF : " + temp.getNof());
+//            System.out.println();
         });
     }
 
