@@ -55,6 +55,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.final-project.automated-refactoring-tool</groupId>
+            <artifactId>lazy-class-merging-candidates</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -97,6 +102,14 @@
         <repository>
             <id>Automated-Refactoring-Tool-Lazy-Class-Detection</id>
             <url>https://raw.github.com/zapahlevie/Automated-Refactoring-Tool-Lazy-Class-Detection/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>Automated-Refactoring-Tool-Lazy-Class-Merging-Candidates</id>
+            <url>https://raw.github.com/zapahlevie/Automated-Refactoring-Tool-Lazy-Class-Merging-Candidates/mvn-repo/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
